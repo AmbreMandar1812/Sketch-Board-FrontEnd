@@ -67,6 +67,9 @@ const Board = () => {
 
   // before browser pain
   useLayoutEffect(() => {
+    if (typeof window === "undefined") {
+      return; // Do nothing if running on the server
+    }
     if (!canvasRef.current) return;
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
