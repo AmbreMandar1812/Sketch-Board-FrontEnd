@@ -18,9 +18,9 @@ const Toolbox = () => {
   const { color, size } = useSelector((state) => state.toolbox[activeMenuItem]);
   
   if (activeMenuItem === MENU_ITEMS.ERASER) {
+    socket.emit("changeConfig", { color: COLORS.WHITE, size });
     dispatch(changeColor({ item: activeMenuItem, color: COLORS.WHITE }));
     console.log("the new color is ", COLORS.WHITE, size);
-    socket.emit("changeConfig", { color: COLORS.WHITE, size });
   }
 
   const updateBrushSize = (e) => {
@@ -30,8 +30,8 @@ const Toolbox = () => {
 
   const updateColor = (newColor) => {
     dispatch(changeColor({ item: activeMenuItem, color: newColor }));
-    console.log("the new color is ",newColor,size)
     socket.emit("changeConfig", { color: newColor, size });
+    console.log("the new color is ",newColor,size)
   };
   
 
